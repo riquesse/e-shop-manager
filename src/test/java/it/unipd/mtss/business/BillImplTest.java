@@ -107,4 +107,142 @@ public class BillImplTest {
         //Assert
         assertEquals(290, total, 0.0);
     }
+
+    @Test
+    public void regaloArticoloMenoCaroTest() {
+
+        //Arrange
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 1", 19));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 2", 15));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 3", 29));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 1", 40));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 2", 19));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 3", 69));
+        bill = new BillImpl();
+        User user = new User("Riccardo", "Smanio", LocalDate.of(1997,6,15), "ZPFRDM65A05C567D");
+
+        //Act
+        try {
+            totale += bill.getOrderPrice(itemsOrdered, user);
+        }
+        catch(BillException exc) {
+            exc.getErrorMessage();
+        }
+
+        //Assert
+        assertEquals(176, totale, 0.0);
+    }
+
+    @Test
+    public void regaloArticoloMenoCaroTest2() {
+
+        //Arrange
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 1", 19));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 2", 15));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 3", 29));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 1", 40));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 2", 19));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 3", 69));
+        itemsOrdered.add(new EItem(EItem.items.MotherBoard, "Motherboard 1", 10));
+        itemsOrdered.add(new EItem(EItem.items.Processor, "Processore 1", 8));
+        bill = new BillImpl();
+        User user = new User("Riccardo", "Smanio", LocalDate.of(1997,6,15), "ZPFRDM65A05C567D");
+
+        //Act
+        try {
+            totale += bill.getOrderPrice(itemsOrdered, user);
+        }
+        catch(BillException exc) {
+            exc.getErrorMessage();
+        }
+
+        //Assert
+        assertEquals(201, totale, 0.0);
+    }
+
+    @Test
+    public void regaloArticoloMenoCaroTest3() {
+
+        //Arrange
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 1", 8));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 2", 12));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 3", 5));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 4", 13));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 5", 10));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 6", 6));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 7", 4));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 8", 14));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 9", 11));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 10", 9));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 11", 7));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 1", 15));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 2", 16));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 3", 17));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 4", 18));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 5", 19));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 6", 20));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 7", 21));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 8", 22));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 9", 23));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 10", 24));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 11", 25));
+        itemsOrdered.add(new EItem(EItem.items.MotherBoard, "Motherboard 1", 150));
+        itemsOrdered.add(new EItem(EItem.items.Processor, "Processore 1", 200));
+        bill = new BillImpl();
+        User user = new User("Riccardo", "Smanio", LocalDate.of(1997,6,15), "ZPFRDM65A05C567D");
+
+        //Act
+        try {
+            totale += bill.getOrderPrice(itemsOrdered, user);
+        }
+        catch(BillException exc) {
+            exc.getErrorMessage();
+        }
+
+        //Assert
+        assertEquals(660, totale, 0.0);
+    }
+
+    @Test
+    public void regaloArticoloMenoCaroTest4() {
+
+        //Arrange
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 1", 8));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 2", 12));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 3", 5));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 4", 13));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 5", 10));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 6", 6));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 7", 4));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 8", 14));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 9", 11));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 10", 9));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse 11", 7));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 1", 15));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 2", 16));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 3", 17));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 4", 18));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 5", 19));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 6", 20));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 7", 21));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 8", 22));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 9", 23));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 10", 24));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera 11", 25));
+        itemsOrdered.add(new EItem(EItem.items.MotherBoard, "Motherboard 1", 3));
+        itemsOrdered.add(new EItem(EItem.items.Processor, "Processore 1", 200));
+        bill = new BillImpl();
+        User user = new User("Riccardo", "Smanio", LocalDate.of(1997,6,15), "ZPFRDM65A05C567D");
+
+        //Act
+        try {
+            totale = bill.getOrderPrice(itemsOrdered, user);
+        }
+        catch(BillException exc) {
+            exc.getErrorMessage();
+        }
+        
+        //Assert
+        assertEquals(515, totale, 0.0);
+    }
 }

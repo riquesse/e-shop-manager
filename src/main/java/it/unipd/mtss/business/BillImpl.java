@@ -16,8 +16,9 @@ public class BillImpl implements Bill {
     public double getOrderPrice(List<EItem> itemsOrdered, User user) throws BillException{
 
         double totale = 0;
-        int cpuCounter = 0, mouseCounter = 0;
+        int cpuCounter = 0, mouseCounter = 0, keyboardCounter = 0;
         EItem cheapestMouse = null, cheapestCpu = null;
+        EItem cheapestItem = null, secondCheapestItem = null;
 
         for(EItem item : itemsOrdered){
         
@@ -32,11 +33,32 @@ public class BillImpl implements Bill {
                 cheapestMouse = updateCheapestMouse(cheapestMouse, item);
                 mouseCounter += 1;
             }
+
+            if(item.getCategoriaItem() == EItem.items.Keyboard){
+                keyboardCounter += 1;
+            }
+
+            if(cheapestItem == null || item.getPrezzo() < cheapestItem.getPrezzo()) {
+                secondCheapestItem = cheapestItem;
+                cheapestItem = item;
+            }
+            else if(secondCheapestItem == null || item.getPrezzo() < secondCheapestItem.getPrezzo()){
+                secondCheapestItem = item;
+            }
         }
 
         totale -= getCpuDiscount(cpuCounter, cheapestCpu);
 
-        totale -= getMouseDiscount(mouseCounter, cheapestMouse);
+        double mouseDiscount = getMouseDiscount(mouseCounter, cheapestMouse);
+
+        totale -= mouseDiscount;
+
+        if(mouseDiscount > 0 && cheapestItem == cheapestMouse){
+            totale -= getCheaperItemDiscount(mouseCounter, keyboardCounter, secondCheapestItem);
+        }
+        else {
+            totale -= getCheaperItemDiscount(mouseCounter, keyboardCounter, cheapestItem);
+        }
         
         return totale;
 
@@ -68,5 +90,12 @@ public class BillImpl implements Bill {
             cheapestMouse = item;
         }
         return cheapestMouse;
+    }
+
+    private double getCheaperItemDiscount(int mouseCount, int keyboardCount, EItem cheapestItem) {
+        if(mouseCount > 0 && mouseCount == keyboardCount) {
+            return cheapestItem.getPrezzo();
+        }
+        return 0;
     }
 }
