@@ -5,15 +5,34 @@
 
 package it.unipd.mtss.business;
 
-import java.util.List;
 import it.unipd.mtss.business.exception.BillException;
 import it.unipd.mtss.model.EItem;
 import it.unipd.mtss.model.User;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class BillImpl implements Bill {
+
+    private static LocalDate lastOrderDate = null;
+    private static final ArrayList<User> giftedOrders = new ArrayList<User>();
+    private LocalTime time;
+    private LocalDate date;
+
+    public BillImpl(LocalTime time, LocalDate date) {
+        this.time = time;
+        this.date = date;
+    }
 
     @Override
     public double getOrderPrice(List<EItem> itemsOrdered, User user) throws BillException{
+
+        if(giveAway(user)) {
+            return 0;
+        }
 
         if(itemsOrdered.size()>30){
             throw new BillException("Too many items");
@@ -108,5 +127,23 @@ public class BillImpl implements Bill {
             return cheapestItem.getPrezzo();
         }
         return 0;
+    }
+
+    private boolean giveAway(User user) {
+
+        if(this.date.equals(lastOrderDate) == false){
+            lastOrderDate = date;
+            giftedOrders.clear();
+        }
+
+        if(time.getHour() >= 18 && time.getHour()<= 19){
+            if(!user.isMaggiorenne() && time.getSecond() % 2 == 0){
+                if(BillImpl.giftedOrders.size() < 10 && giftedOrders.contains(user) == false){
+                    BillImpl.giftedOrders.add(user);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
