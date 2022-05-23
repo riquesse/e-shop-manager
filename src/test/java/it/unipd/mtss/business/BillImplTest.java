@@ -59,4 +59,29 @@ public class BillImplTest {
         //Assert
         assertEquals(940, totale, 0.0);
     } 
+
+    @Test
+    public void scontoCPUTest() {
+
+        //Arrange
+        itemsOrdered.add(new EItem(items.Processor, " ", 79));
+        itemsOrdered.add(new EItem(items.Processor, " ", 189));
+        itemsOrdered.add(new EItem(items.Processor, " ", 249));
+        itemsOrdered.add(new EItem(items.Processor, " ", 99));
+        itemsOrdered.add(new EItem(items.Processor, " ", 129));
+        itemsOrdered.add(new EItem(items.Processor, " ", 199));
+        bill = new BillImpl();
+        User user = new User("Riccardo", "Smanio", LocalDate.of(1997, 6, 15), "ZPFRDM65A05C567D");
+
+        //Act
+        try {
+            totale += bill.getOrderPrice(itemsOrdered, user); 
+        }
+        catch(BillException exc) {
+            exc.getErrorMessage();
+        }
+
+        //Assert
+        assertEquals( 904.5, totale, 0.0);
+    }
 }
