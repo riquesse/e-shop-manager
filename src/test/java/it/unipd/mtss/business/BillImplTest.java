@@ -268,4 +268,16 @@ public class BillImplTest {
         //Assert
         assertEquals(987.3, totale, 0.0);
     }
+
+    @Test(expected = BillException.class)
+    public void piùDi30ArticoliTest() throws BillException{
+
+        for(int i=0; i<40; ++i)
+            itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera", 199));
+
+        User user = new User("Riccardo", "Smanio", LocalDate.of(1997,6,15), "ZPFRDM65A05C567D");
+        bill = new BillImpl();
+
+        bill.getOrderPrice(itemsOrdered, user);       
+    } 
 }

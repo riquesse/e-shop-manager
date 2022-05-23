@@ -15,6 +15,10 @@ public class BillImpl implements Bill {
     @Override
     public double getOrderPrice(List<EItem> itemsOrdered, User user) throws BillException{
 
+        if(itemsOrdered.size()>30){
+            throw new BillException("Too many items");
+        }
+
         double totale = 0;
         int cpuCounter = 0, mouseCounter = 0, keyboardCounter = 0;
         EItem cheapestMouse = null, cheapestCpu = null;
