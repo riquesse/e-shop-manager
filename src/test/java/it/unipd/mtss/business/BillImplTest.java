@@ -245,4 +245,27 @@ public class BillImplTest {
         //Assert
         assertEquals(515, totale, 0.0);
     }
+
+    @Test
+    public void totaleSopraMilleEuroTest() {
+        
+        //Arrange
+        itemsOrdered.add(new EItem(EItem.items.Processor, "Processore", 499));
+        itemsOrdered.add(new EItem(EItem.items.Keyboard, "Tastiera", 199));
+        itemsOrdered.add(new EItem(EItem.items.Mouse, "Mouse", 129));
+        itemsOrdered.add(new EItem(EItem.items.MotherBoard, "Scheda Madre", 399));
+        bill = new BillImpl();
+        User user = new User("Riccardo", "Smanio", LocalDate.of(1997,6,15),"ZPFRDM65A05C567D");
+
+        //Act
+        try{
+            totale += bill.getOrderPrice(itemsOrdered, user);
+        }
+        catch(BillException exc) {
+            exc.getErrorMessage();
+        }
+
+        //Assert
+        assertEquals(987.3, totale, 0.0);
+    }
 }

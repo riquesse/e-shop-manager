@@ -60,6 +60,10 @@ public class BillImpl implements Bill {
             totale -= getCheaperItemDiscount(mouseCounter, keyboardCounter, cheapestItem);
         }
         
+        if(totale > 1000) {
+            totale -= (totale/100)*10;
+        }
+
         return totale;
 
     }
