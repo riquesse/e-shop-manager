@@ -16,8 +16,8 @@ public class BillImpl implements Bill {
     public double getOrderPrice(List<EItem> itemsOrdered, User user) throws BillException{
 
         double totale = 0;
-        int cpuCounter = 0;
-        EItem cheapestCpu=null;
+        int cpuCounter = 0, mouseCounter = 0;
+        EItem cheapestMouse = null, cheapestCpu = null;
 
         for(EItem item : itemsOrdered){
         
@@ -27,9 +27,16 @@ public class BillImpl implements Bill {
                 cheapestCpu = updateCheapestCpu(cheapestCpu, item);
                 cpuCounter += 1;
             }
+
+            if(item.getCategoriaItem() == EItem.items.Mouse) {
+                cheapestMouse = updateCheapestMouse(cheapestMouse, item);
+                mouseCounter += 1;
+            }
         }
 
         totale -= getCpuDiscount(cpuCounter, cheapestCpu);
+
+        totale -= getMouseDiscount(mouseCounter, cheapestMouse);
         
         return totale;
 
@@ -48,5 +55,18 @@ public class BillImpl implements Bill {
         }
         return cheapestCpu;
     }
-    
+
+    private double getMouseDiscount(int count, EItem cheapestMouse) {
+        if(count > 10) {
+            return cheapestMouse.getPrezzo();
+        }
+        return 0;
+    }   
+
+    private EItem updateCheapestMouse(EItem cheapestMouse, EItem item) {
+        if(cheapestMouse == null || item.getPrezzo() < cheapestMouse.getPrezzo()) {
+            cheapestMouse = item;
+        }
+        return cheapestMouse;
+    }
 }

@@ -84,4 +84,27 @@ public class BillImplTest {
         //Assert
         assertEquals( 904.5, totale, 0.0);
     }
+
+    @Test
+    public void regaloMouseTest() {
+
+        //Arrange
+        for(int i=0; i<=10; ++i){
+            itemsOrdered.add(new EItem(EItem.items.Mouse, "Logitech G20", 29));
+        }
+        bill = new BillImpl();
+        User user = new User("Riccardo", "Smanio", LocalDate.of(1997, 6, 15), "ZPFRDM65A05C567D");
+        double total = 0;
+
+        //Act
+        try {
+            total += bill.getOrderPrice(itemsOrdered, user); 
+        }
+        catch(BillException exc) {
+            exc.getErrorMessage();
+        }
+
+        //Assert
+        assertEquals(290, total, 0.0);
+    }
 }
