@@ -357,18 +357,17 @@ public class BillImplTest {
         itemsOrdered.add(new EItem(EItem.items.Keyboard, "prova", 5));
         User user = new User("Riccardo", "Rossi", LocalDate.of(2006, 5, 20), "ZPFRDM65A05C567D");
         bill = new BillImpl(LocalTime.of(18, 20, 10), LocalDate.of(2022, 5, 16));
-        double total = 0;
 
         //Act
         try {
-            total += bill.getOrderPrice(itemsOrdered, user);
+            totale += bill.getOrderPrice(itemsOrdered, user);
         }
         catch(BillException exc) {
             exc.getErrorMessage();
         }
 
         //Assert
-        assertEquals(0, total, 0.0);
+        assertEquals(0, totale, 0.0);
     }
 
     @Test
@@ -379,18 +378,17 @@ public class BillImplTest {
         User user = new User("Riccardo", "Rossi", LocalDate.of(2006, 5, 20), "ZPFRDM65A05C567D");
         bill = new BillImpl(LocalTime.of(18, 20, 10), LocalDate.of(2022, 4, 21));
         BillImpl secondBill = new BillImpl(LocalTime.of(18, 59, 40), LocalDate.of(2022, 4, 21));
-        double total = 0; 
 
         //Act
         try {
-            total += bill.getOrderPrice(itemsOrdered, user) + secondBill.getOrderPrice(itemsOrdered, user);
+            totale += bill.getOrderPrice(itemsOrdered, user) + secondBill.getOrderPrice(itemsOrdered, user);
         }
         catch(BillException exc) {
             exc.getErrorMessage();
         }
 
         //Assert
-        assertEquals(7, total, 0.0);
+        assertEquals(7, totale, 0.0);
     }
 
     @Test
@@ -401,19 +399,18 @@ public class BillImplTest {
         User user = new User("Riccardo", "Rossi", LocalDate.of(2006, 5, 20), "ZPFRDM65A05C567D");
         bill = new BillImpl(LocalTime.of(18, 20, 10), LocalDate.of(2022, 4, 30));
         BillImpl secondBill = new BillImpl(LocalTime.of(18, 20, 10), LocalDate.of(2022, 5, 30));
-        double total = 0; 
 
         //Act
         try {
-            total += bill.getOrderPrice(itemsOrdered, user);
-            total += secondBill.getOrderPrice(itemsOrdered, user);
+            totale += bill.getOrderPrice(itemsOrdered, user);
+            totale += secondBill.getOrderPrice(itemsOrdered, user);
         }
         catch(BillException exc) {
             exc.getErrorMessage();
         }
 
         //Assert
-        assertEquals(0, total, 0.0);
+        assertEquals(0, totale, 0.0);
     }
 
     @Test
@@ -423,18 +420,17 @@ public class BillImplTest {
         User user = new User("Riccardo", "Rossi", LocalDate.of(2006, 5, 20), "ZPFRDM65A05C567D");
         itemsOrdered.add(new EItem(EItem.items.Keyboard, "prova", 5));
         bill = new BillImpl(LocalTime.of(18, 20, 15), LocalDate.of(2020, 05, 22));
-        double total = 0; 
 
         //Act
         try {
-            total += bill.getOrderPrice(itemsOrdered, user);
+            totale += bill.getOrderPrice(itemsOrdered, user);
         }
         catch(BillException exc) {
             exc.getErrorMessage();
         }
 
         //Assert
-        assertEquals(7, total, 0.0);
+        assertEquals(7, totale, 0.0);
     }
 
 
@@ -456,29 +452,28 @@ public class BillImplTest {
         User user12 = new User("Andrea", "Rossi", LocalDate.of(2006, 5, 20), "MP32PYYOV6GLW7OO");
         itemsOrdered.add(new EItem(EItem.items.Processor, "CPU", 10));
         bill = new BillImpl(LocalTime.of(18, 20, 20), LocalDate.of(2023, 5, 22));
-        double total = 0;
 
         //Act
         try {
-            total += bill.getOrderPrice(itemsOrdered, user1);
-            total += bill.getOrderPrice(itemsOrdered, user2);
-            total += bill.getOrderPrice(itemsOrdered, user3);
-            total += bill.getOrderPrice(itemsOrdered, user4);
-            total += bill.getOrderPrice(itemsOrdered, user5);
-            total += bill.getOrderPrice(itemsOrdered, user6);
-            total += bill.getOrderPrice(itemsOrdered, user7);
-            total += bill.getOrderPrice(itemsOrdered, user8);
-            total += bill.getOrderPrice(itemsOrdered, user9);
-            total += bill.getOrderPrice(itemsOrdered, user10);
-            total += bill.getOrderPrice(itemsOrdered, user11);
-            total += bill.getOrderPrice(itemsOrdered, user12);
+            totale += bill.getOrderPrice(itemsOrdered, user1);
+            totale += bill.getOrderPrice(itemsOrdered, user2);
+            totale += bill.getOrderPrice(itemsOrdered, user3);
+            totale += bill.getOrderPrice(itemsOrdered, user4);
+            totale += bill.getOrderPrice(itemsOrdered, user5);
+            totale += bill.getOrderPrice(itemsOrdered, user6);
+            totale += bill.getOrderPrice(itemsOrdered, user7);
+            totale += bill.getOrderPrice(itemsOrdered, user8);
+            totale += bill.getOrderPrice(itemsOrdered, user9);
+            totale += bill.getOrderPrice(itemsOrdered, user10);
+            totale += bill.getOrderPrice(itemsOrdered, user11);
+            totale += bill.getOrderPrice(itemsOrdered, user12);
         }
         catch(BillException exc) {
             exc.getErrorMessage();
         }
 
         //Assert
-        assertEquals(20, total, 0);
+        assertEquals(20, totale, 0);
     }
 
     @Test
@@ -500,23 +495,22 @@ public class BillImplTest {
         itemsOrdered.add(new EItem(EItem.items.Processor, "CPU", 10));
         bill = new BillImpl(LocalTime.of(18, 20, 20), LocalDate.of(2023, 1, 2));
         BillImpl secondBill = new BillImpl(LocalTime.of(18, 20, 20), LocalDate.of(2023, 1, 3));
-        double total = 0;
         double nextDayTotal = 0;
 
         //Act
         try {
-            total += bill.getOrderPrice(itemsOrdered, user1);
-            total += bill.getOrderPrice(itemsOrdered, user2);
-            total += bill.getOrderPrice(itemsOrdered, user3);
-            total += bill.getOrderPrice(itemsOrdered, user4);
-            total += bill.getOrderPrice(itemsOrdered, user5);
-            total += bill.getOrderPrice(itemsOrdered, user6);
-            total += bill.getOrderPrice(itemsOrdered, user7);
-            total += bill.getOrderPrice(itemsOrdered, user8);
-            total += bill.getOrderPrice(itemsOrdered, user9);
-            total += bill.getOrderPrice(itemsOrdered, user10);
-            total += bill.getOrderPrice(itemsOrdered, user11);
-            total += bill.getOrderPrice(itemsOrdered, user12);
+            totale += bill.getOrderPrice(itemsOrdered, user1);
+            totale += bill.getOrderPrice(itemsOrdered, user2);
+            totale += bill.getOrderPrice(itemsOrdered, user3);
+            totale += bill.getOrderPrice(itemsOrdered, user4);
+            totale += bill.getOrderPrice(itemsOrdered, user5);
+            totale += bill.getOrderPrice(itemsOrdered, user6);
+            totale += bill.getOrderPrice(itemsOrdered, user7);
+            totale += bill.getOrderPrice(itemsOrdered, user8);
+            totale += bill.getOrderPrice(itemsOrdered, user9);
+            totale += bill.getOrderPrice(itemsOrdered, user10);
+            totale += bill.getOrderPrice(itemsOrdered, user11);
+            totale += bill.getOrderPrice(itemsOrdered, user12);
 
             nextDayTotal += secondBill.getOrderPrice(itemsOrdered, user12);
             nextDayTotal += secondBill.getOrderPrice(itemsOrdered, user11);
@@ -531,7 +525,7 @@ public class BillImplTest {
         }
 
         //Assert
-        assertEquals(20, total, 0);
+        assertEquals(20, totale, 0);
         assertEquals(0, nextDayTotal, 0);
     }
 }
